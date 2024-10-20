@@ -1,0 +1,153 @@
+# version: "3.8"
+
+# networks:
+#   hirestar-network:
+#     external: true
+
+# services:
+#   orderer7.hirestar.com:
+#     container_name: orderer7.hirestar.com
+#     image: hyperledger/fabric-orderer:2.1
+#     dns_search: .
+#     environment:
+#       - ORDERER_GENERAL_LOGLEVEL=info
+#       - FABRIC_LOGGING_SPEC=INFO
+#       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+#       - ORDERER_GENERAL_GENESISMETHOD=file
+#       - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block
+#       - ORDERER_GENERAL_LOCALMSPID=OrdererMSP
+#       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+#       - ORDERER_GENERAL_TLS_ENABLED=true
+#       - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+#       - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+#       - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+#       - ORDERER_KAFKA_VERBOSE=true
+#       - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+#       - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+#       - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+#       - ORDERER_METRICS_PROVIDER=prometheus
+#       - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:8443
+#       - ORDERER_GENERAL_LISTENPORT=13050
+#     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderers
+#     command: orderer
+#     ports:
+#       - 13050:13050
+#       - 8449:8443
+#     networks:
+#       - hirestar-network
+#     volumes:
+#       - ./scripts/step_2_fetch_new_genesis_block_and_start_container/genesis.block:/var/hyperledger/orderer/genesis.block
+#       - ./crypto-config/ordererOrganizations/hirestar.com/orderers/orderer7.hirestar.com/msp:/var/hyperledger/orderer/msp
+#       - ./crypto-config/ordererOrganizations/hirestar.com/orderers/orderer7.hirestar.com/tls:/var/hyperledger/orderer/tls
+# version: "3.8"
+
+networks:
+  hirestar-network:
+      external: true
+
+services:
+  orderer7.hirestar.com:
+    container_name: orderer7.hirestar.com
+    image: hyperledger/fabric-orderer:2.1
+    dns_search: .
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=info
+      - FABRIC_LOGGING_SPEC=INFO
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP3
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_KAFKA_VERBOSE=true
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_METRICS_PROVIDER=prometheus
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:8443
+      - ORDERER_GENERAL_LISTENPORT=13050
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderers
+    command: orderer
+    ports:
+      - 13050:13050
+      - 8449:8443
+    networks:
+      - hirestar-network
+    volumes:
+      - ../../artifacts/channel/genesis.block:/var/hyperledger/orderer/genesis.block
+      - ./crypto-config/ordererOrganizations/hirestar.com/orderers/orderer7.hirestar.com/msp:/var/hyperledger/orderer/msp
+      - ./crypto-config/ordererOrganizations/hirestar.com/orderers/orderer7.hirestar.com/tls:/var/hyperledger/orderer/tls
+  
+  orderer8.hirestar.com:
+    container_name: orderer8.hirestar.com
+    image: hyperledger/fabric-orderer:2.1
+    dns_search: .
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP3
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_KAFKA_VERBOSE=true
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_METRICS_PROVIDER=prometheus
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:8443
+      - ORDERER_GENERAL_LISTENPORT=14050
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderers
+    command: orderer
+    ports:
+      - 14050:14050
+      - 8450:8443
+    networks:
+      - hirestar-network
+    volumes:
+      - ../../artifacts/channel/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ./crypto-config/ordererOrganizations/hirestar.com/orderers/orderer8.hirestar.com/msp:/var/hyperledger/orderer/msp
+      - ./crypto-config/ordererOrganizations/hirestar.com/orderers/orderer8.hirestar.com/tls:/var/hyperledger/orderer/tls
+
+
+  orderer9.hirestar.com:
+    container_name: orderer9.hirestar.com
+    image: hyperledger/fabric-orderer:2.1
+    dns_search: .
+    environment:
+      - ORDERER_GENERAL_LOGLEVEL=debug
+      - FABRIC_LOGGING_SPEC=DEBUG
+      - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
+      - ORDERER_GENERAL_GENESISMETHOD=file
+      - ORDERER_GENERAL_GENESISFILE=/var/hyperledger/orderer/orderer.genesis.block
+      - ORDERER_GENERAL_LOCALMSPID=OrdererMSP3
+      - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
+      - ORDERER_GENERAL_TLS_ENABLED=true
+      - ORDERER_GENERAL_TLS_PRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_TLS_CERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_TLS_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_KAFKA_VERBOSE=true
+      - ORDERER_GENERAL_CLUSTER_CLIENTCERTIFICATE=/var/hyperledger/orderer/tls/server.crt
+      - ORDERER_GENERAL_CLUSTER_CLIENTPRIVATEKEY=/var/hyperledger/orderer/tls/server.key
+      - ORDERER_GENERAL_CLUSTER_ROOTCAS=[/var/hyperledger/orderer/tls/ca.crt]
+      - ORDERER_METRICS_PROVIDER=prometheus
+      - ORDERER_OPERATIONS_LISTENADDRESS=0.0.0.0:8443
+      - ORDERER_GENERAL_LISTENPORT=15050
+    working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderers
+    command: orderer
+    ports:
+      - 15050:15050
+      - 8451:8443
+    networks:
+      - hirestar-network
+    volumes:
+      - ../../artifacts/channel/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+      - ./crypto-config/ordererOrganizations/hirestar.com/orderers/orderer9.hirestar.com/msp:/var/hyperledger/orderer/msp
+      - ./crypto-config/ordererOrganizations/hirestar.com/orderers/orderer9.hirestar.com/tls:/var/hyperledger/orderer/tls

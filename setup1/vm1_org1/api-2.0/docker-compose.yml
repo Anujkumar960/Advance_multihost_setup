@@ -1,0 +1,14 @@
+# version: "2.1"
+
+networks:
+  hirestar-network:
+    external: true
+
+services:
+  api:
+    image: api:1.0
+    build: .
+    networks:
+      - hirestar-network
+    ports:
+      - 4000:4000
